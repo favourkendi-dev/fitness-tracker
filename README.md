@@ -30,7 +30,7 @@ Validation is enforced at three levels:
 
 1. Clone the repo and move into it:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/favourkendi-dev/fitness-tracker.git
    cd fitness-tracker-api
    ```
 2. Install dependencies with pipenv:
