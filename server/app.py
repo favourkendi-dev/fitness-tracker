@@ -303,6 +303,11 @@ def add_exercise_to_workout(workout_id, exercise_id):
     if not workout or not exercise:
         return make_response(jsonify({'error': 'Workout or Exercise not found'}), 404)
 
+    # Prevent duplicate exercise-workout links
+    existing = WorkoutExercise.query.filter_by(workout_id=workout.id, exercise_id=exercise.id).first()
+    if existing:
+        return make_response(jsonify({'error': 'Exercise already linked to this workout'}), 409)
+
     json_data = request.get_json() or {}
 
     try:
