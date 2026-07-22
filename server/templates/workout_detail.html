@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Workout Details{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Workout #{{ workout.id }}</h1>
+  <p><strong>Date:</strong> {{ workout.date }}</p>
+  <p><strong>Duration:</strong> {{ workout.duration_minutes }} minutes</p>
+  <p><strong>Notes:</strong> {{ workout.notes or '—' }}</p>
+</div>
+
+<div class="card">
+  <h2>Link an exercise</h2>
+  <form method="post" action="/dashboard/workouts/{{ workout.id }}/link-exercise">
+    <select name="exercise_id" required>
+      {% for exercise in exercises %}
+      <option value="{{ exercise.id }}">{{ exercise.name }} ({{ exercise.category }})</option>
+      {% endfor %}
+    </select>
+    <input type="number" name="reps" placeholder="Reps" />
+    <input type="number" name="sets" placeholder="Sets" />
+    <input type="number" name="duration_seconds" placeholder="Duration seconds" />
+    <button class="btn" type="submit">Add exercise</button>
+  </form>
+</div>
+
+<div class="card">
+  <h2>Exercises in this workout</h2>
+  {% if workout.workout_exercises %}
+  <ul>
+    {% for item in workout.workout_exercises %}
+    <li>{{ item.exercise.name }} — reps: {{ item.reps or '—' }}, sets: {{ item.sets or '—' }}, duration: {{ item.duration_seconds or '—' }}s</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No exercises linked yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

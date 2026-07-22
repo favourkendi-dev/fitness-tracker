@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}New Exercise{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Create Exercise</h1>
+  {% if errors %}
+  <div class="error">{{ errors[0] }}</div>
+  {% endif %}
+  <form method="post">
+    <label>Name</label>
+    <input type="text" name="name" required />
+    <label>Category</label>
+    <select name="category">
+      <option value="cardio">Cardio</option>
+      <option value="strength">Strength</option>
+      <option value="flexibility">Flexibility</option>
+      <option value="balance">Balance</option>
+    </select>
+    <label><input type="checkbox" name="equipment_needed" /> Needs equipment</label>
+    <button class="btn" type="submit">Save exercise</button>
+    <a class="btn secondary" href="/dashboard/exercises">Cancel</a>
+  </form>
+</div>
+{% endblock %}

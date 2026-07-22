@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Fitness Tracker Dashboard</h1>
+  <p>This page shows the data currently stored in the server database.</p>
+  <div class="grid">
+    <div>
+      <h2>Workouts</h2>
+      <ul>
+        {% for workout in workouts %}
+        <li>{{ workout.date }} — {{ workout.duration_minutes }} mins</li>
+        {% else %}
+        <li>No workouts yet.</li>
+        {% endfor %}
+      </ul>
+      <a class="btn" href="/dashboard/workouts">View all workouts</a>
+    </div>
+    <div>
+      <h2>Exercises</h2>
+      <ul>
+        {% for exercise in exercises %}
+        <li>{{ exercise.name }} ({{ exercise.category }})</li>
+        {% else %}
+        <li>No exercises yet.</li>
+        {% endfor %}
+      </ul>
+      <a class="btn" href="/dashboard/exercises">View all exercises</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

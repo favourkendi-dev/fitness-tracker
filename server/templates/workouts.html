@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Workouts{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Workouts</h1>
+  <p>These are the workouts currently stored in the server database.</p>
+  <a class="btn" href="/dashboard/workouts/new">Create workout</a>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Notes</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for workout in workouts %}
+      <tr>
+        <td>{{ workout.id }}</td>
+        <td>{{ workout.date }}</td>
+        <td>{{ workout.duration_minutes }} mins</td>
+        <td>{{ workout.notes or '—' }}</td>
+        <td><a href="/dashboard/workouts/{{ workout.id }}">Open</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">No workouts yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

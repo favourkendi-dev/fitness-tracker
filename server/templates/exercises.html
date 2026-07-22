@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Exercises{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Exercises</h1>
+  <p>These are the exercises currently stored in the server database.</p>
+  <a class="btn" href="/dashboard/exercises/new">Create exercise</a>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Equipment</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for exercise in exercises %}
+      <tr>
+        <td>{{ exercise.id }}</td>
+        <td>{{ exercise.name }}</td>
+        <td>{{ exercise.category }}</td>
+        <td>{{ 'Yes' if exercise.equipment_needed else 'No' }}</td>
+        <td><a href="/dashboard/exercises/{{ exercise.id }}">Open</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">No exercises yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

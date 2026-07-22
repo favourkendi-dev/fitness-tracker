@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Exercise Details{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>{{ exercise.name }}</h1>
+  <p><strong>Category:</strong> {{ exercise.category }}</p>
+  <p><strong>Equipment needed:</strong> {{ 'Yes' if exercise.equipment_needed else 'No' }}</p>
+</div>
+
+<div class="card">
+  <h2>Used in workouts</h2>
+  {% if exercise.workouts %}
+  <ul>
+    {% for workout in exercise.workouts %}
+    <li>Workout #{{ workout.id }} — {{ workout.date }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>This exercise is not linked to any workouts yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
